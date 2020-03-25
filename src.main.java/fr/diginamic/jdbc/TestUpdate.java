@@ -23,38 +23,23 @@ public class TestUpdate {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		ResourceBundle db = ResourceBundle.getBundle("db");
-        Class.forName(db.getString("db.driver"));
+      
+		try {
+			Class.forName(db.getString("db.driver"));
+		} catch (ClassNotFoundException e){
+			System.out.println("Message d'erreur : " + e.getMessage());
+		}
   
-        Connection connection = null; 
-        try {
-        	connection = DriverManager.getConnection(db.getString("db.url"), db.getString("db.user"), db.getString("db.pass"));
+
+        try(Connection connection = DriverManager.getConnection(db.getString("db.url"), db.getString("db.user"), db.getString("db.pass"));
+        		Statement statement = connection.createStatement(); ) {
+        	 
+            // changement du nom du fournisseur 4
+        	 statement.executeUpdate(" update fournisseur set nom = 'La Maison des Peintures' where id='4'");
+        	 
         } catch (SQLException e) {
         	System.out.println("Message d'erreur : " + e.getMessage());
-        	connection.close();
         }
-        
-        Statement statement = null;
-        
-        try {
-        	statement = connection.createStatement();
-        } catch (SQLException e){
-        	System.out.println("Message d'erreur : " + e.getMessage());
-        	connection.close();
-        	statement.close();
-        }
-        
-       
-        // changement du nom du fournisseur 4
-        try {
-            statement.executeUpdate(" update fournisseur set nom = 'La Maison des Peintures' where id='4'");
-        } catch(SQLException e) {
-        	System.out.println("Message d'erreur : " + e.getMessage());
-        	connection.close();
-        	statement.close();
-        }
-        
-        connection.close();
-        statement.close();
  
 
 	}

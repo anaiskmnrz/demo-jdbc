@@ -24,7 +24,11 @@ public class TestInsertion {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		ResourceBundle db = ResourceBundle.getBundle("db");
-        Class.forName(db.getString("db.driver"));
+		try {
+			Class.forName(db.getString("db.driver"));
+		} catch (ClassNotFoundException e){
+			System.out.println("Message d'erreur : " + e.getMessage());
+		}
   
         Connection connection = null; 
         try {
