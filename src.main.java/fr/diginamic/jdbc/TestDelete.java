@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import fr.diginamic.jdb.entites.Fournisseur;
+import fr.diginamic.jdbc.dao.FournisseurDaoJdbc;
+
 /** Représentation 
  *
  * @author KOMINIARZ Anaïs
@@ -22,7 +25,7 @@ public class TestDelete {
 	 * @throws ClassNotFoundException 
 	 */
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-		ResourceBundle db = ResourceBundle.getBundle("db");
+		/*ResourceBundle db = ResourceBundle.getBundle("db");
 		try {
 			Class.forName(db.getString("db.driver"));
 		} catch (ClassNotFoundException e){
@@ -39,7 +42,18 @@ public class TestDelete {
         } catch (SQLException e) {
         	System.out.println("Message d'erreur : " + e.getMessage());
         }
-        
+        */
+		
+		//méthode TP4
+		
+		FournisseurDaoJdbc f = new FournisseurDaoJdbc();
+		Fournisseur f1 = new Fournisseur(4, "Pâtisserie en folie");
+		try {
+			f.delete(f1);
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+
 
 	}
 

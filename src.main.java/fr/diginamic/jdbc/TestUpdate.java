@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import fr.diginamic.jdbc.dao.FournisseurDaoJdbc;
+
 /** Test des updates 
  *
  * @author KOMINIARZ Anaïs
@@ -22,7 +24,7 @@ public class TestUpdate {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		ResourceBundle db = ResourceBundle.getBundle("db");
+		/*ResourceBundle db = ResourceBundle.getBundle("db");
       
 		try {
 			Class.forName(db.getString("db.driver"));
@@ -39,8 +41,16 @@ public class TestUpdate {
         	 
         } catch (SQLException e) {
         	System.out.println("Message d'erreur : " + e.getMessage());
-        }
- 
+        }*/
+		
+		//méthode TP4
+		
+		FournisseurDaoJdbc f = new FournisseurDaoJdbc();
+		try {
+			f.update("Patisserie en folie", "Pâtisserie en folie");
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 

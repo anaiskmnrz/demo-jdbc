@@ -3,15 +3,12 @@
  */
 package fr.diginamic.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.List;
 
 import fr.diginamic.jdb.entites.Fournisseur;
+import fr.diginamic.jdbc.dao.FournisseurDaoJdbc;
 
 /** Test du select
  *
@@ -28,7 +25,7 @@ public class TestSelect {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
 		
-		ResourceBundle db = ResourceBundle.getBundle("db");
+		/*ResourceBundle db = ResourceBundle.getBundle("db");
 		try {
 			Class.forName(db.getString("db.driver"));
 		} catch (ClassNotFoundException e){
@@ -56,6 +53,21 @@ public class TestSelect {
         for (Fournisseur fournisseur : fournisseurs) {
         	System.out.println(fournisseur);
         }
+	}*/
+		
+		//méthode TP4
+		
+		FournisseurDaoJdbc f = new FournisseurDaoJdbc();
+		List<Fournisseur> fournisseurs = new ArrayList<>();
+		try {
+			fournisseurs = f.extraire();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	
+		for (Fournisseur fournisseur : fournisseurs) {
+			System.out.println(fournisseur);
+		}
+		
 	}
-
 }
